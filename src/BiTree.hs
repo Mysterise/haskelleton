@@ -1,3 +1,5 @@
+module BiTree where
+
 data BiTree a = Nil
               | Leaf a
               | BiTree a (BiTree a) (BiTree a)  
@@ -26,3 +28,8 @@ distribute l r (Leaf a)             = BiTree a l r
 distribute l r (BiTree a Nil cr)    = BiTree a l                      (distribute Nil r cr)
 distribute l r (BiTree a cl  Nil)   = BiTree a (distribute l Nil cl)  r
 distribute l r (BiTree a cl  cr)    = BiTree a (distribute l Nil cl)  (distribute Nil r cr)
+
+depth :: BiTree a -> Int
+depth Nil = 0
+depth (Leaf a) = 1
+depth (BiTree a l r) = 1 + max (depth l) (depth r)
