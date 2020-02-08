@@ -1,14 +1,14 @@
-data Tree a = Nil
+data BTree a = Nil
             | Leaf a
-            | Node a (Tree a) (Tree a)  
+            | Node a (BTree a) (BTree a)  
             deriving Show
 
-instance Functor Tree where
+instance Functor BTree where
     fmap f Nil          = Nil
     fmap f (Leaf a)     = Leaf (f a)
     fmap f (Node a l r) = Node (f a) (f <$> l) (f <$> r)
 
-instance Applicative Tree where
+instance Applicative BTree where
     pure                            = Leaf
     Nil         <*> _               = Nil
     Leaf f      <*> t               = f <$> t
